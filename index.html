@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Настройки корпорации — Прототип</title>
+    <title>Список ресторанов — iiko</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -17,7 +17,6 @@
                 <img class="brand__logo" src="iiko.svg" onerror="this.onerror=null;this.src='Iiko icon.png'" alt="" />
                 <div class="brand__text">
                     <div class="brand__corp">Test PJP - Mamzar Centre</div>
-                    <div class="brand__section">Настройки системы</div>
                 </div>
             </div>
         </div>
@@ -34,18 +33,19 @@
         <aside class="sidebar">
             <nav class="nav">
                 <div class="nav__group">
-                    <div class="nav__title">Настройки системы</div>
+                    <button class="nav__back" onclick="history.back()"><img src="icons/icon-action-arrow_circle_down.svg" alt="" style="transform: rotate(90deg);" /> Настройки системы</button>
                     <a class="nav__item" href="#"><img class="nav__icon" src="icons/icon-action-settings.svg" alt="" /> <span>Общие настройки</span></a>
                     <a class="nav__item" href="#"><img class="nav__icon" src="icons/icon-action-update.svg" alt="" /> <span>Прогнозирование</span></a>
-                    <a class="nav__item nav__item--active" href="#"><img class="nav__icon" src="icons/icon-action-admin_panel_settings.svg" alt="" /> <span>Настройки корпорации</span></a>
+                    <a class="nav__item nav__item--active" href="#"><img class="nav__icon" src="icons/storefront.svg" alt="" /> <span>Рестораны</span></a>
                     <div class="nav__sub">
-                        <a class="nav__subitem nav__subitem--active" href="#section-profile">Профиль</a>
-                        <a class="nav__subitem" href="#section-common">Общие настройки</a>
-                        <a class="nav__subitem" href="#section-logos">Логотипы</a>
-                        <a class="nav__subitem" href="#section-routing">Общая карта приготовления</a>
-                        <a class="nav__subitem" href="#section-courses">Наименование курсов</a>
+                        <a class="nav__subitem" href="#">Шаблоны</a>
+                        <a class="nav__subitem" href="#">Шаблоны чеков</a>
+                        <a class="nav__subitem nav__subitem--active" href="#">Рестораны</a>
+                        <a class="nav__subitem" href="#">Комиссии агрегаторов</a>
+                        <a class="nav__subitem" href="#">Панели</a>
+                        <a class="nav__subitem" href="#">Автодобавление блюд</a>
+                        <a class="nav__subitem" href="#">Управление сетями iikoCard</a>
                     </div>
-                    <a class="nav__item" href="#"><img class="nav__icon" src="icons/icon-action-store.svg" alt="" /> <span>Рестораны</span></a>
                     <a class="nav__item" href="#"><img class="nav__icon" src="icons/icon-action-shopping_basket.svg" alt="" /> <span>Склад</span></a>
                     <a class="nav__item" href="#"><img class="nav__icon" src="icons/icon-action-analytics.svg" alt="" /> <span>Аналитика</span></a>
                     <a class="nav__item" href="#"><img class="nav__icon" src="icons/icon-action-announcement.svg" alt="" /> <span>Оповещения</span></a>
@@ -58,165 +58,50 @@
 
         <main class="content">
             <div class="content__header">
-                <h1 class="typo-h6">Настройки корпорации</h1>
+                <h1 class="typo-h6">Список ресторанов</h1>
                 <div class="content__actions">
-                    <button class="btn">Отменить</button>
-                    <button class="btn btn--primary">Сохранить</button>
+                    <button class="icon-btn" aria-label="Поиск" title="Поиск">
+                        <img src="icons/icon-action-search.svg" alt="" style="width: 20px; height: 20px;" />
+                    </button>
+                    <button class="btn btn--primary" id="addRestaurantBtn">
+                        <img src="icons/add_circle.svg" alt="" style="width: 18px; height: 18px; display: inline-block; vertical-align: middle; margin-right: 4px;" /> Добавить
+                    </button>
+                    <button class="icon-btn" aria-label="Фильтры" title="Фильтры">
+                        <img src="icons/icon-action-filter_alt.svg" alt="" style="width: 20px; height: 20px;" />
+                    </button>
                 </div>
             </div>
 
-            <form class="form card" autocomplete="off">
-                <section class="form__section" id="section-profile">
-                    <div class="form__section-header">
-                        <h2 class="typo-subtitle2">Профиль корпорации</h2>
-                        <div class="typo-caption">Основная информация</div>
-                    </div>
-                    <div class="form__grid">
-                        <label class="field">
-                            <span class="field__label">Название</span>
-                            <input id="corpName" class="field__input" type="text" placeholder="Введите название" />
-                        </label>
-                        <label class="field field--full">
-                            <span class="field__label">Описание</span>
-                            <textarea class="field__input" rows="3" placeholder="Краткое описание"></textarea>
-                        </label>
-                        <label class="field">
-                            <span class="field__label">UID</span>
-                            <input id="corpUid" class="field__input" type="text" placeholder="Уникальный идентификатор" disabled />
-                            <div class="typo-caption" id="corpUidHint" style="margin-top: 6px;">UID подтягивается из CRM и недоступен для редактирования</div>
-                        </label>
-                        <label class="field">
-                            <span class="field__label">ФИО Руководителя</span>
-                            <input class="field__input" type="text" placeholder="Иванов Иван Иванович" />
-                        </label>
-                        <label class="field">
-                            <span class="field__label">Телефон</span>
-                            <input class="field__input" type="tel" placeholder="+7 (___) ___-__-__" />
-                        </label>
-                        <label class="field">
-                            <span class="field__label">e-mail</span>
-                            <input class="field__input" type="email" placeholder="name@company.com" />
-                        </label>
-                        <label class="field field--full">
-                            <span class="field__label">Адрес</span>
-                            <input class="field__input" type="text" placeholder="Город, улица, дом" />
-                        </label>
-                        <label class="field">
-                            <span class="field__label">ИНН</span>
-                            <input class="field__input" type="text" placeholder="ИНН" />
-                        </label>
-                        <label class="field">
-                            <span class="field__label">КПП</span>
-                            <input class="field__input" type="text" placeholder="КПП" />
-                        </label>
-                        <label class="field field--switch">
-                            <input id="franchiseToggle" type="checkbox" />
-                            <span>Франшизная сеть</span>
-                        </label>
-                        <label class="field" id="royaltyField" style="display: none;">
-                            <span class="field__label">Роялти по умолчанию, %</span>
-                            <input class="field__input" type="number" min="0" max="100" step="0.1" placeholder="0" />
-                        </label>
-                    </div>
-                </section>
-
-                <section class="form__section" id="section-common">
-                    <div class="form__section-header">
-                        <h2 class="typo-subtitle2" style="display: inline-flex; align-items: center; gap: 6px;">Общие настройки корпорации <img src="icons/icon-alert-error_outline.svg" alt="" title="Настройки ниже реплицируются на всю сеть входящих ресторанов" style="width: 18px; height: 18px;" /></h2>
-                    </div>
-                    <div class="form__grid">
-                        <label class="field">
-                            <span class="field__label">Валюта</span>
-                            <select class="field__input">
-                                <option>RUB — ₽</option>
-                                <option>USD — $</option>
-                                <option>EUR — €</option>
-                            </select>
-                        </label>
-                    </div>
-                </section>
-
-                <section class="form__section" id="section-logos">
-                    <div class="form__section-header">
-                        <h2 class="typo-subtitle2">Логотипы</h2>
-                    </div>
-                    <div class="form__grid">
-                        <label class="field">
-                            <span class="field__label">Логотип</span>
-                            <div class="upload">
-                                <img class="upload__preview" src="iiko.svg" onerror="this.onerror=null;this.src='Iiko icon.png'" alt="" />
-                                <button type="button" class="btn">Загрузить</button>
-                            </div>
-                        </label>
-                        <label class="field">
-                            <span class="field__label">Логотип, используемый в документах</span>
-                            <div class="upload">
-                                <div class="upload__placeholder">Нет файла</div>
-                                <button type="button" class="btn">Загрузить</button>
-                            </div>
-                            <div class="card" style="margin-top: 12px; padding: 12px;">
-                                <div class="typo-caption" style="margin-bottom: 8px;">Предпросмотр документа</div>
-                                <div class="doc-preview" style="border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;">
-                                    <div style="display: flex; align-items: center; gap: 12px; padding: 12px; border-bottom: 1px solid #eee;">
-                                        <img src="iiko.svg" alt="" style="width: 40px; height: 40px; object-fit: contain;" />
-                                        <div style="font-weight: 500;">ООО "Компания" — Акт выполненных работ</div>
-                                    </div>
-                                    <div style="padding: 12px; color: #666; font-size: 14px;">Содержимое документа для примера предпросмотра...</div>
-                                </div>
-                            </div>
-                        </label>
-                        <label class="field field--full">
-                            <span class="field__label">Фоновый рисунок</span>
-                            <div class="upload">
-                                <img class="upload__preview upload__preview--wide" src="рестораны.png" alt="" />
-                                <button type="button" class="btn">Загрузить</button>
-                            </div>
-                        </label>
-                    </div>
-                </section>
-
-                <section class="form__section" id="section-routing">
-                    <div class="form__section-header">
-                        <h2 class="typo-subtitle2">Общая карта приготовления блюд</h2>
-                        <div class="typo-caption">Список мест приготовления с возможностью добавления, редактирования и удаления</div>
-                    </div>
-                    <div class="form__grid">
-                        <div class="field field--full">
-                            <div class="list" id="prepPlacesList" style="display: flex; flex-direction: column; gap: 8px;"></div>
-                            <div style="display: flex; gap: 8px; margin-top: 8px;">
-                                <input id="prepPlaceInput" class="field__input" type="text" placeholder="Например: 01 Бар" />
-                                <button id="prepPlaceAdd" type="button" class="icon-btn" aria-label="Добавить место приготовления" title="Добавить"><img src="icons/add_circle.svg" alt="" style="width: 20px; height: 20px;" /></button>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="form__section" id="section-courses">
-                    <div class="form__section-header">
-                        <h2 class="typo-subtitle2">Наименование курсов</h2>
-                    </div>
-                    <div class="form__grid">
-                        <div class="field field--full">
-                            <div class="card" style="overflow: hidden;">
-                                <table class="table" style="width: 100%; border-collapse: collapse;">
-                                    <thead>
-                                        <tr style="text-align: left; background: #fafafa;">
-                                            <th style="padding: 10px; border-bottom: 1px solid #eee; width: 80px;">№</th>
-                                            <th style="padding: 10px; border-bottom: 1px solid #eee;">Наименование</th>
-                                            <th style="padding: 10px; border-bottom: 1px solid #eee; width: 140px;">Действия</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="coursesTableBody"></tbody>
-                                </table>
-                            </div>
-                            <div style="display: flex; gap: 8px; margin-top: 8px;">
-                                <input id="courseNameInput" class="field__input" type="text" placeholder="Например: Курс основной (Main)" />
-                                <button id="courseAddBtn" type="button" class="icon-btn" aria-label="Добавить курс" title="Добавить"><img src="icons/add_circle.svg" alt="" style="width: 20px; height: 20px;" /></button>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </form>
+            <div class="card table__scroll">
+                <table id="restaurantsTable">
+                    <thead>
+                        <tr>
+                            <th class="sortable" data-column="name">
+                                Название
+                                <span class="sort-icon">↕</span>
+                            </th>
+                            <th class="sortable" data-column="legalEntity">
+                                Юридическое лицо
+                                <span class="sort-icon">↕</span>
+                            </th>
+                            <th class="sortable" data-column="address">
+                                Адрес
+                                <span class="sort-icon">↕</span>
+                            </th>
+                            <th class="sortable" data-column="template">
+                                Шаблон
+                                <span class="sort-icon">↕</span>
+                            </th>
+                            <th class="sortable" data-column="timezone">
+                                Часовой пояс
+                                <span class="sort-icon">↕</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="restaurantsTableBody">
+                    </tbody>
+                </table>
+            </div>
         </main>
     </div>
 
